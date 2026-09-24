@@ -4,6 +4,7 @@
   /* Brand Colors */
   --color-brand-blue: #0068c9;
   --color-brand-blue-dark: #0053a3;
+
   --color-brand-green: #43b82a;
   --color-brand-green-dark: #26961e;
 
@@ -24,37 +25,178 @@
 }
 
 
+/* =========================================================
+   GLOBAL
+========================================================= */
 
 html {
   scroll-behavior: smooth;
+  scroll-padding-top: 90px;
+
+  /* Better touch scrolling */
+  -webkit-overflow-scrolling: touch;
+
+  /* Prevent ugly overscroll bounce from affecting layout */
+  overscroll-behavior-y: auto;
+
+  /* Better scrollbar space on supported browsers */
+  scrollbar-gutter: stable;
 }
+
 
 body {
   margin: 0;
+
   font-family: var(--font-body), sans-serif;
+
   background: #ffffff;
   color: var(--color-medical-navy);
+
+  /* Smooth touch scrolling */
+  -webkit-overflow-scrolling: touch;
+
+  /* Prevent horizontal accidental scrolling */
+  overflow-x: hidden;
+
+  /* Better mobile scrolling */
+  touch-action: pan-y;
 }
+
+
+/* =========================================================
+   FONTS
+========================================================= */
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-heading), sans-serif;
+}
+
+p,
+span,
+li,
+label,
+input,
+textarea,
+select,
+button,
+a {
+  font-family: var(--font-body), sans-serif;
+}
+
+
+/* Buttons/headings where needed */
+button {
+  font-family: var(--font-heading), sans-serif;
+}
+
+
+/* =========================================================
+   LINKS / BUTTONS
+========================================================= */
 
 button,
 a {
   -webkit-tap-highlight-color: transparent;
-   --font-body: var(--font-open-sans);
-}
-ul li{
-   --font-body: var(--font-open-sans);
-}
-
-h1,h2,h3,h4,h5,h6{
-    --font-heading: var(--font-manrope);
-}
-p{
-  --font-body: var(--font-open-sans);
-}
-button{
-    --font-heading: var(--font-manrope);
 }
 
 
+/* Better touch feedback */
+button,
+a {
+  touch-action: manipulation;
+}
 
 
+/* =========================================================
+   DESKTOP SCROLLBAR
+========================================================= */
+
+/* Chrome / Edge / Safari */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f4f8fb;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #b9cad8;
+  border-radius: 999px;
+  border: 2px solid #f4f8fb;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #8faabd;
+}
+
+
+/* Firefox */
+html {
+  scrollbar-width: thin;
+  scrollbar-color: #b9cad8 #f4f8fb;
+}
+
+
+/* =========================================================
+   SELECTION
+========================================================= */
+
+::selection {
+  background: #dff1ff;
+  color: #12345b;
+}
+
+
+/* =========================================================
+   MOBILE SCROLLING
+========================================================= */
+
+@media (max-width: 768px) {
+  html {
+    scroll-padding-top: 75px;
+
+    /*
+      Native mobile scrolling ko smooth aur natural rakhta hai.
+      Browser ka native momentum scrolling use hota hai.
+    */
+    -webkit-overflow-scrolling: touch;
+
+    scrollbar-width: none;
+  }
+
+  body {
+    -webkit-overflow-scrolling: touch;
+    overflow-x: hidden;
+  }
+
+  body::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+
+/* =========================================================
+   REDUCED MOTION
+   Accessibility ke liye
+========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

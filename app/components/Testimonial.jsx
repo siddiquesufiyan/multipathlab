@@ -1,349 +1,348 @@
-
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import {
-  Star,
-  Quote,
   ChevronLeft,
   ChevronRight,
-  HeartPulse,
-  ShieldCheck,
+  Quote,
 } from "lucide-react";
 
 function Testimonial() {
   const testimonials = [
     {
       name: "Priya Sharma",
-      location: "Delhi",
-      initials: "PS",
-      color: "bg-emerald-100 text-emerald-700",
+      location: "Andheri, Mumbai",
+      image:
+        "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=300&q=80",
       review:
         "The home sample collection was very convenient. The staff was polite, professional and made the entire process comfortable.",
-      service: "Home Blood Collection",
     },
     {
       name: "Rahul Verma",
-      location: "Ghaziabad",
-      initials: "RV",
-      color: "bg-blue-100 text-blue-700",
+      location: "Bandra, Mumbai",
+      image:
+        "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=300&q=80",
       review:
         "Booking my blood test was simple and hassle-free. The collection professional arrived on time and explained everything clearly.",
-      service: "Blood Test",
     },
     {
       name: "Anjali Gupta",
-      location: "Noida",
-      initials: "AG",
-      color: "bg-rose-100 text-rose-700",
+      location: "Powai, Mumbai",
+      image:
+        "https://images.unsplash.com/photo-1531123897727-8f129e1688ce?auto=format&fit=crop&w=300&q=80",
       review:
         "I booked a health checkup for my parents. The home collection made things much easier, and the overall experience was smooth.",
-      service: "Health Checkup",
     },
     {
       name: "Amit Kumar",
-      location: "Indirapuram",
-      initials: "AK",
-      color: "bg-amber-100 text-amber-700",
+      location: "Goregaon, Mumbai",
+      image:
+        "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=300&q=80",
       review:
         "The booking process was quick, and the collection staff was courteous. It was convenient to get the sample collected at home.",
-      service: "Home Sample Collection",
     },
     {
       name: "Neha Singh",
-      location: "Vaishali",
-      initials: "NS",
-      color: "bg-violet-100 text-violet-700",
+      location: "Thane, Mumbai",
+      image:
+        "https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=300&q=80",
       review:
         "A comfortable experience from booking to sample collection. I appreciate the professional and friendly service.",
-      service: "Diagnostic Tests",
     },
   ];
 
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [visibleCount, setVisibleCount] = useState(3);
-
-  useEffect(() => {
-    const updateVisibleCount = () => {
-      if (window.innerWidth < 640) {
-        setVisibleCount(1);
-      } else if (window.innerWidth < 1024) {
-        setVisibleCount(2);
-      } else {
-        setVisibleCount(3);
-      }
-    };
-
-    updateVisibleCount();
-
-    window.addEventListener("resize", updateVisibleCount);
-
-    return () => {
-      window.removeEventListener("resize", updateVisibleCount);
-    };
-  }, []);
-
-  const maxIndex = Math.max(
-    0,
-    testimonials.length - visibleCount
-  );
 
   const nextSlide = () => {
     setCurrentIndex((prev) =>
-      prev >= maxIndex ? 0 : prev + 1
+      prev === testimonials.length - 1 ? 0 : prev + 1
     );
   };
 
   const prevSlide = () => {
     setCurrentIndex((prev) =>
-      prev <= 0 ? maxIndex : prev - 1
+      prev === 0 ? testimonials.length - 1 : prev - 1
     );
   };
 
-  useEffect(() => {
-    setCurrentIndex((prev) => Math.min(prev, maxIndex));
-  }, [maxIndex]);
+  const current = testimonials[currentIndex];
 
   return (
     <section
       id="testimonials"
-      className="relative overflow-hidden bg-gradient-to-br from-[#f1f9ff] via-[#edf7ff] to-[#effbf5] py-16 font-body sm:py-20 lg:py-24"
+      className="
+        bg-white
+        px-5
+        py-16
+        font-body
+        sm:px-8
+        sm:py-20
+        lg:px-6
+        lg:py-24
+      "
     >
-      {/* Background Decoration */}
-      <div className="pointer-events-none absolute -left-24 top-20 h-64 w-64 rounded-full bg-brand-green/5 blur-3xl" />
+      <div className="mx-auto max-w-7xl">
 
-      <div className="pointer-events-none absolute -right-24 bottom-10 h-72 w-72 rounded-full bg-brand-blue/5 blur-3xl" />
+        {/* Heading */}
+        <div className="mx-auto max-w-3xl text-center">
+          <span
+            className="
+              inline-block
+              font-[var(--font-heading)]
+              text-xs
+              font-extrabold
+              uppercase
+              tracking-[0.14em]
+              text-[#43b82a]
+            "
+          >
+            Patient Testimonials
+          </span>
 
-      <div className="relative mx-auto max-w-7xl px-5 sm:px-8 lg:px-6">
-        {/* Section Heading */}
-        <div className="mx-auto mb-12 max-w-2xl text-center sm:mb-14">
-          <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-emerald-100 bg-white/80 px-4 py-2 text-xs font-extrabold uppercase tracking-wider text-brand-blue">
-            <HeartPulse
-              size={15}
-              className="text-brand-green"
-            />
-            Patient Experiences
-          </div>
-
-          <h2 className="font-heading text-3xl font-extrabold leading-tight tracking-tight text-medical-navy sm:text-4xl lg:text-5xl">
-            Care That Makes
-            <span className="block text-brand-green">
-              Patients Smile
+          <h2
+            className="
+              mt-3
+              font-[var(--font-heading)]
+              text-3xl
+              font-extrabold
+              leading-tight
+              tracking-tight
+              text-[#12345b]
+              sm:text-4xl
+              lg:text-5xl
+            "
+          >
+            Trusted by Patients,
+            <span className="block text-[#43b82a]">
+              Valued by Families
             </span>
           </h2>
 
-          <p className="mx-auto mt-4 max-w-xl text-sm leading-7 text-medical-text sm:text-base">
-            Every patient deserves comfortable, convenient
-            and professional care. Here's what patients
-            have to say about their experience.
-          </p>
-
-          {/* Rating Summary */}
-          <div className="mt-6 inline-flex flex-wrap items-center justify-center gap-3 rounded-2xl border border-white bg-white/80 px-5 py-3 shadow-sm">
-            <div className="flex items-center gap-1 text-amber-400">
-              {Array.from({ length: 5 }).map((_, index) => (
-                <Star
-                  key={index}
-                  size={16}
-                  fill="currentColor"
-                />
-              ))}
-            </div>
-
-            <span className="text-sm font-extrabold text-medical-navy">
-              Patient Feedback
-            </span>
-
-            <span className="hidden h-4 w-px bg-slate-200 sm:block" />
-
-            <span className="text-xs text-medical-text">
-              Your comfort matters to us
-            </span>
-          </div>
-        </div>
-
-        {/* Carousel Header */}
-        <div className="mb-6 flex items-center justify-between">
-          <div>
-            <h3 className="font-heading text-lg font-extrabold text-medical-navy sm:text-xl">
-              What Our Patients Say
-            </h3>
-
-            <p className="mt-1 text-xs text-medical-text sm:text-sm">
-              Real experiences, personal care
-            </p>
-          </div>
-
-          {/* Desktop Arrows */}
-          <div className="hidden items-center gap-3 sm:flex">
-            <button
-              type="button"
-              onClick={prevSlide}
-              aria-label="Previous testimonials"
-              className="flex h-11 w-11 items-center justify-center rounded-full border border-brand-blue/20 bg-white text-brand-blue shadow-sm transition hover:border-brand-green hover:bg-brand-green hover:text-white"
-            >
-              <ChevronLeft size={21} />
-            </button>
-
-            <button
-              type="button"
-              onClick={nextSlide}
-              aria-label="Next testimonials"
-              className="flex h-11 w-11 items-center justify-center rounded-full bg-brand-green text-white shadow-md transition hover:bg-brand-green-dark"
-            >
-              <ChevronRight size={21} />
-            </button>
-          </div>
-        </div>
-
-        {/* Carousel */}
-        <div className="overflow-hidden">
-          <div
-            className="flex items-stretch transition-transform duration-500 ease-in-out"
-            style={{
-              transform: `translateX(-${
-                currentIndex * (100 / visibleCount)
-              }%)`,
-            }}
+          <p
+            className="
+              mx-auto
+              mt-4
+              max-w-2xl
+              text-sm
+              leading-7
+              text-[#45627f]
+              sm:text-base
+            "
           >
-            {testimonials.map((item, index) => (
-              <div
-                key={item.name}
-                className="shrink-0 px-2 pb-3"
-                style={{
-                  width: `${100 / visibleCount}%`,
-                }}
-              >
-                <article className="group relative flex h-full min-h-[310px] flex-col rounded-3xl border border-white bg-white p-5 shadow-[0_8px_35px_rgba(15,50,80,0.06)] transition duration-300 hover:-translate-y-1 hover:shadow-xl sm:p-6 lg:p-7">
-                  {/* Quote Icon */}
-                  <div className="mb-5 flex items-start justify-between">
-                    <div className="flex items-center gap-1 text-amber-400">
-                      {Array.from({ length: 5 }).map(
-                        (_, starIndex) => (
-                          <Star
-                            key={starIndex}
-                            size={15}
-                            fill="currentColor"
-                          />
-                        )
-                      )}
-                    </div>
-
-                    <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-emerald-50 text-brand-green">
-                      <Quote size={21} />
-                    </div>
-                  </div>
-
-                  {/* Review */}
-                  <p className="flex-1 text-sm leading-7 text-medical-text sm:text-[15px]">
-                    “{item.review}”
-                  </p>
-
-                  {/* Service Tag */}
-                  <div className="mt-5 inline-flex w-fit items-center gap-2 rounded-full bg-[#f1f9ff] px-3 py-2 text-[11px] font-bold text-brand-blue">
-                    <ShieldCheck
-                      size={14}
-                      className="text-brand-green"
-                    />
-                    {item.service}
-                  </div>
-
-                  {/* Divider */}
-                  <div className="my-5 h-px bg-slate-100" />
-
-                  {/* Patient Info */}
-                  <div className="flex items-center gap-3">
-                    <div
-                      className={`flex h-12 w-12 shrink-0 items-center justify-center rounded-full text-sm font-extrabold ${item.color}`}
-                    >
-                      {item.initials}
-                    </div>
-
-                    <div className="min-w-0">
-                      <h4 className="truncate font-heading text-sm font-extrabold text-medical-navy">
-                        {item.name}
-                      </h4>
-
-                      <p className="mt-1 text-xs text-medical-text">
-                        {item.location}
-                      </p>
-                    </div>
-
-                    <div className="ml-auto flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-emerald-50 text-brand-green">
-                      <ShieldCheck size={15} />
-                    </div>
-                  </div>
-                </article>
-              </div>
-            ))}
-          </div>
+            Read what our patients have to say about their
+            experience with MultiPathLab and our home collection services.
+          </p>
         </div>
 
-        {/* Carousel Controls */}
-        <div className="mt-7 flex items-center justify-between sm:mt-9">
-          {/* Pagination Dots */}
-          <div className="flex items-center gap-2">
-            {Array.from({
-              length: maxIndex + 1,
-            }).map((_, index) => (
+        {/* Testimonial */}
+        <div className="mx-auto mt-12 max-w-5xl sm:mt-14">
+          <div
+            className="
+              relative
+              overflow-hidden
+              rounded-[5px]
+              border
+              border-[#e5edf3]
+              bg-[#f8fcff]
+            "
+          >
+            {/* Top Green Line */}
+            <div className="h-1 w-full bg-[#43b82a]" />
+
+            <div
+              className="
+                relative
+                flex
+                min-h-[390px]
+                flex-col
+                items-center
+                justify-center
+                px-8
+                py-12
+                text-center
+                sm:min-h-[410px]
+                sm:px-16
+                sm:py-14
+                lg:min-h-[430px]
+                lg:px-24
+                xl:min-h-[430px]
+              "
+            >
+              {/* Quote Icon */}
+              <div
+                className="
+                  absolute
+                  left-6
+                  top-6
+                  flex
+                  h-12
+                  w-12
+                  items-center
+                  justify-center
+                  rounded-[5px]
+                  bg-[#12345b]
+                  text-white
+                  sm:left-8
+                  sm:top-8
+                "
+              >
+                <Quote size={22} />
+              </div>
+
+              {/* Profile Image */}
+              <div
+                className="
+                  flex
+                  h-24
+                  w-24
+                  items-center
+                  justify-center
+                  overflow-hidden
+                  rounded-full
+                  border-4
+                  border-white
+                  bg-[#12345b]
+                  ring-2
+                  ring-[#43b82a]/40
+                  sm:h-28
+                  sm:w-28
+                "
+              >
+                <img
+                  src={current.image}
+                  alt={current.name}
+                  className="h-full w-full object-cover"
+                />
+              </div>
+
+              {/* Name */}
+              <h3
+                className="
+                  mt-5
+                  font-[var(--font-heading)]
+                  text-xl
+                  font-extrabold
+                  text-[#12345b]
+                  sm:text-2xl
+                "
+              >
+                {current.name}
+              </h3>
+
+              {/* Location */}
+              <p
+                className="
+                  mt-1
+                  text-sm
+                  font-semibold
+                  text-[#43b82a]
+                "
+              >
+                {current.location}
+              </p>
+
+              {/* Review */}
+              <p
+                className="
+                  mt-7
+                  max-w-2xl
+                  text-base
+                  leading-8
+                  text-[#45627f]
+                  sm:text-lg
+                  sm:leading-9
+                "
+              >
+                “{current.review}”
+              </p>
+
+              {/* Previous */}
+              <button
+                type="button"
+                onClick={prevSlide}
+                aria-label="Previous testimonial"
+                className="
+                  absolute
+                  left-3
+                  cursor-pointer
+                  top-1/2
+                  flex
+                  h-10
+                  w-10
+                  -translate-y-1/2
+                  items-center
+                  justify-center
+                  rounded-full
+                  border
+                  border-[#12345b]/15
+                  bg-white
+                  text-[#12345b]
+                  transition
+                  duration-200
+                  hover:border-[#43b82a]
+                  hover:bg-[#43b82a]
+                  hover:text-white
+                  sm:left-6
+                  sm:h-11
+                  sm:w-11
+                "
+              >
+                <ChevronLeft size={20} />
+              </button>
+
+              {/* Next */}
+              <button
+                type="button"
+                onClick={nextSlide}
+                aria-label="Next testimonial"
+                className="
+                  absolute
+                  right-3
+                  cursor-pointer
+                  top-1/2
+                  flex
+                  h-10
+                  w-10
+                  -translate-y-1/2
+                  items-center
+                  justify-center
+                  rounded-full
+                  bg-[#43b82a]
+                  text-white
+                  transition
+                  duration-200
+                  hover:bg-[#26961e]
+                  sm:right-6
+                  sm:h-11
+                  sm:w-11
+                "
+              >
+                <ChevronRight size={20} />
+              </button>
+            </div>
+          </div>
+
+          {/* Dots */}
+          <div className="mt-6 flex items-center justify-center gap-2">
+            {testimonials.map((_, index) => (
               <button
                 key={index}
                 type="button"
-                aria-label={`Go to testimonial group ${index + 1}`}
                 onClick={() => setCurrentIndex(index)}
-                className={`h-2.5 rounded-full transition-all duration-300 ${
-                  currentIndex === index
-                    ? "w-8 bg-brand-green"
-                    : "w-2.5 bg-brand-blue/20 hover:bg-brand-green/50"
-                }`}
+                aria-label={`Show testimonial ${index + 1}`}
+                className={`
+                  h-2
+                  rounded-full
+                  transition-all
+                  duration-300
+                  ${
+                    currentIndex === index
+                      ? "w-8 bg-[#43b82a]"
+                      : "w-2 bg-[#12345b]/20 hover:bg-[#43b82a]/60"
+                  }
+                `}
               />
             ))}
-          </div>
-
-          {/* Slide Counter */}
-          <p className="text-xs font-bold text-medical-text">
-            {currentIndex + 1}
-            <span className="mx-1 text-slate-300">/</span>
-            {maxIndex + 1}
-          </p>
-
-          {/* Mobile Arrows */}
-          <div className="flex items-center gap-2 sm:hidden">
-            <button
-              type="button"
-              onClick={prevSlide}
-              aria-label="Previous testimonials"
-              className="flex h-10 w-10 items-center justify-center rounded-full border border-brand-blue/20 bg-white text-brand-blue shadow-sm"
-            >
-              <ChevronLeft size={20} />
-            </button>
-
-            <button
-              type="button"
-              onClick={nextSlide}
-              aria-label="Next testimonials"
-              className="flex h-10 w-10 items-center justify-center rounded-full bg-brand-green text-white shadow-sm"
-            >
-              <ChevronRight size={20} />
-            </button>
-          </div>
-        </div>
-
-        {/* Bottom Trust Message */}
-        <div className="mt-12 flex flex-col items-center justify-center gap-3 rounded-3xl border border-white bg-white/70 px-5 py-6 text-center sm:flex-row sm:gap-4 sm:py-5">
-          <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-emerald-50 text-brand-green">
-            <HeartPulse size={22} />
-          </div>
-
-          <div>
-            <p className="font-heading text-sm font-extrabold text-medical-navy sm:text-base">
-              Your Health, Our Priority
-            </p>
-
-            <p className="mt-1 text-xs leading-5 text-medical-text sm:text-sm">
-              Making diagnostic care more convenient, one
-              home visit at a time.
-            </p>
           </div>
         </div>
       </div>

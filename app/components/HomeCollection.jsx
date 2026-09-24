@@ -400,7 +400,7 @@ function HomeCollection() {
                 <div className="mt-10 text-center">
                   <button
                     onClick={() => setShowAll(!showAll)}
-                    className="rounded-xl border border-brand-blue px-7 py-3 font-bold text-brand-blue transition hover:bg-brand-blue hover:text-white"
+                    className="rounded-xl border cursor-pointer border-brand-blue px-7 py-3 font-bold text-brand-blue transition hover:bg-brand-blue hover:text-white"
                   >
                     {showAll
                       ? "Show Less"

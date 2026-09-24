@@ -132,7 +132,7 @@ export default function BookingForm({
             type="button"
             onClick={onClose}
             aria-label="Close booking form"
-            className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-medical-light text-lg text-medical-navy transition hover:bg-border-light"
+            className="flex h-9 cursor-pointer w-9 shrink-0 items-center justify-center rounded-lg bg-medical-light text-lg text-medical-navy transition hover:bg-border-light"
           >
             <FiX />
           </button>
@@ -287,7 +287,7 @@ export default function BookingForm({
           {/* SUBMIT BUTTON */}
           <button
             type="submit"
-            className="flex w-full items-center justify-center gap-2 rounded-lg bg-brand-green px-4 py-3 text-sm font-bold text-white transition hover:bg-brand-green-dark focus:outline-none focus:ring-4 focus:ring-brand-green/20 sm:text-base"
+            className="flex  cursor-pointer w-full items-center justify-center gap-2 rounded-lg bg-brand-green px-4 py-3 text-sm font-bold text-white transition hover:bg-brand-green-dark focus:outline-none focus:ring-4 focus:ring-brand-green/20 sm:text-base"
           >
             <FiMessageCircle className="shrink-0 text-lg" />
             <span>Send Booking Enquiry</span>

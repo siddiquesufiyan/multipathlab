@@ -4,42 +4,167 @@ import { Phone, MessageCircle } from "lucide-react";
 
 function FloatingContact() {
   const phoneNumber = "9082742451";
+  const whatsappNumber = "919082742451";
 
   const whatsappMessage = encodeURIComponent(
-    "Hello Doctor, mujhe blood test / home sample collection ke baare mein information chahiye."
+    "Hello, mujhe blood test / home sample collection ke baare mein information chahiye."
   );
 
   return (
-    <div className="fixed bottom-5 right-5 z-[9999] flex flex-col items-end gap-3">
-      {/* Call Button */}
+    <div
+      className="
+        fixed
+        bottom-4
+        right-4
+        z-[9999]
+        flex
+        flex-col
+        items-end
+        gap-2.5
+        sm:bottom-5
+        sm:right-5
+        sm:gap-3
+      "
+    >
+      {/* =====================================================
+          CALL
+      ===================================================== */}
       <a
         href={`tel:${phoneNumber}`}
-        aria-label="Call Doctor"
-        className="group flex items-center gap-3 rounded-full bg-brand-blue px-4 py-3 text-white shadow-lg shadow-brand-blue/25 transition-all duration-300 hover:-translate-y-1 hover:bg-brand-blue-dark"
+        aria-label="Call MultiPathLab"
+        className="
+          group
+          flex
+          h-12
+          w-12
+          cursor-pointer
+          items-center
+          justify-center
+          rounded-full
+          bg-brand-blue
+          text-white
+          shadow-md
+          shadow-brand-blue/20
+          transition-all
+          duration-300
+          hover:-translate-y-1
+          hover:bg-brand-blue-dark
+          sm:h-auto
+          sm:w-auto
+          sm:gap-2
+          sm:px-3
+          sm:py-2.5
+          md:px-3.5
+        "
       >
-        <span className="hidden text-sm font-semibold sm:block">
+        {/* Label */}
+        <span
+          className="
+            hidden
+            text-xs
+            font-bold
+            sm:block
+            md:text-sm
+          "
+        >
           Call Now
         </span>
 
-        <span className="flex h-10 w-10 items-center justify-center rounded-full bg-white/15">
-          <Phone className="h-5 w-5" />
+        {/* Icon */}
+        <span
+          className="
+            flex
+            h-9
+            w-9
+            items-center
+            justify-center
+            rounded-full
+            bg-white/15
+            sm:h-8
+            sm:w-8
+          "
+        >
+          <Phone
+            className="
+              h-[18px]
+              w-[18px]
+              sm:h-[17px]
+              sm:w-[17px]
+            "
+            strokeWidth={2.2}
+          />
         </span>
       </a>
 
-      {/* WhatsApp Button */}
+      {/* =====================================================
+          WHATSAPP
+      ===================================================== */}
       <a
-        href={`https://wa.me/91${phoneNumber}?text=${whatsappMessage}`}
+        href={`https://wa.me/${whatsappNumber}?text=${whatsappMessage}`}
         target="_blank"
         rel="noopener noreferrer"
-        aria-label="WhatsApp"
-        className="group flex items-center gap-3 rounded-full bg-brand-green px-4 py-3 text-white shadow-lg shadow-brand-green/25 transition-all duration-300 hover:-translate-y-1 hover:bg-brand-green-dark"
+        aria-label="WhatsApp MultiPathLab"
+        className="
+          group
+          flex
+          h-12
+          w-12
+          cursor-pointer
+          items-center
+          justify-center
+          rounded-full
+          bg-brand-green
+          text-white
+          shadow-md
+          shadow-brand-green/20
+          transition-all
+          duration-300
+          hover:-translate-y-1
+          hover:bg-brand-green-dark
+          sm:h-auto
+          sm:w-auto
+          sm:gap-2
+          sm:px-3
+          sm:py-2.5
+          md:px-3.5
+        "
       >
-        <span className="hidden text-sm font-semibold sm:block">
+        {/* Label */}
+        <span
+          className="
+            hidden
+            text-xs
+            font-bold
+            sm:block
+            md:text-sm
+          "
+        >
           WhatsApp
         </span>
 
-        <span className="flex h-10 w-10 items-center justify-center rounded-full bg-white/15">
-          <MessageCircle className="h-5 w-5" />
+        {/* Icon */}
+        <span
+          className="
+            flex
+            h-9
+            w-9
+            items-center
+            justify-center
+            rounded-full
+            bg-white/15
+            sm:h-8
+            sm:w-8
+          "
+        >
+          <MessageCircle
+            className="
+              h-[19px]
+              w-[19px]
+              sm:h-[18px]
+              sm:w-[18px]
+            "
+            strokeWidth={2.2}
+          />
         </span>
       </a>
     </div>

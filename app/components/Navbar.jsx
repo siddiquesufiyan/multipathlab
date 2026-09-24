@@ -2,6 +2,7 @@
 
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
+import BookingForm from "./BookingForm";
 import {
   CalendarDays,
   ChevronRight,
@@ -38,6 +39,7 @@ const navLinks = [
 
 function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [bookingOpen, setBookingOpen] = useState(false);
 
   /* ==========================================
      BODY SCROLL LOCK
@@ -268,8 +270,9 @@ function Navbar() {
               DESKTOP CTA
           ================================================== */}
 
-          <a
-            href="/book-a-test"
+          <button
+            type="button"
+            onClick={() => setBookingOpen(true)}
             className="
               hidden
               shrink-0
@@ -296,7 +299,7 @@ function Navbar() {
 
               transition-all
               duration-200
-
+                cursor-pointer
               hover:-translate-y-[1px]
               hover:bg-[var(--color-brand-green-dark)]
 
@@ -313,7 +316,7 @@ function Navbar() {
             />
 
             Book a Test
-          </a>
+          </button>
 
           {/* =================================================
               MOBILE / TABLET ACTIONS
@@ -338,8 +341,9 @@ function Navbar() {
                 BOOK TEST
             ================================================ */}
 
-            <a
-              href="/book-a-test"
+            <button
+              type="button"
+              onClick={() => setBookingOpen(true)}
               className="
                 inline-flex
 
@@ -395,7 +399,7 @@ function Navbar() {
               <span>
                 Book a Test
               </span>
-            </a>
+            </button>
 
             {/* ===============================================
                 MENU BUTTON
@@ -668,9 +672,12 @@ function Navbar() {
                 MOBILE MENU CTA
             ================================================== */}
 
-            <a
-              href="/book-a-test"
-              onClick={() => setIsMenuOpen(false)}
+            <button
+              type="button"
+              onClick={() => {
+                setIsMenuOpen(false);
+                setBookingOpen(true);
+              }}
               className="
                 mt-4
 
@@ -712,10 +719,18 @@ function Navbar() {
               />
 
               Book a Test
-            </a>
+            </button>
           </nav>
         </div>
       </div>
+
+      {/* BOOKING FORM MODAL */}
+      <BookingForm
+        isOpen={bookingOpen}
+        onClose={() => setBookingOpen(false)}
+        initialTest=""
+        topOffset="80px"
+      />
     </>
   );
 }

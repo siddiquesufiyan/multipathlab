@@ -14,7 +14,6 @@ import {
   Phone,
   Mail,
   MapPin,
-  ArrowUpRight,
   ArrowUp,
   Clock3,
   ShieldCheck,
@@ -28,16 +27,15 @@ function Footer() {
     { name: "About Us", href: "/about" },
     { name: "Tests & Packages", href: "/tests-packages" },
     { name: "Home Collection", href: "/home-collection" },
-    { name: "Reports", href: "/reports" },
     { name: "Contact Us", href: "/contact" },
   ];
 
   const services = [
     { name: "Blood Collection At Home", href: "/home-collection" },
     { name: "Diagnostic Tests", href: "/tests-packages" },
-    { name: "Privacy Policy", href: "/privacy-policy" },
     { name: "Digital Reports", href: "/reports" },
-    { name: "terms and conditions", href: "/terms-and-conditions" },
+    { name: "Privacy Policy", href: "/privacy-policy" },
+    { name: "Terms & Conditions", href: "/terms-and-conditions" },
   ];
 
   const legalLinks = [
@@ -45,7 +43,6 @@ function Footer() {
     { name: "Terms & Conditions", href: "/terms-and-conditions" },
     { name: "Refund & Cancellation", href: "/refund-cancellation" },
     { name: "Disclaimer", href: "/disclaimer" },
-    { name: "Cookie Policy", href: "/cookie-policy" },
   ];
 
   const scrollToTop = () => {
@@ -56,18 +53,13 @@ function Footer() {
   };
 
   return (
-    <footer className="relative overflow-hidden bg-white text-medical-navy">
-      {/* =========================================================
-          TOP CTA
-      ========================================================= */}
-
-    
+    <footer className="relative overflow-hidden bg-white text-[#12345b]">
 
       {/* =========================================================
           MAIN FOOTER
       ========================================================= */}
 
-      <section className="border-t border-border-light bg-white">
+      <section className="border-t border-[#dce8f2] bg-[#f7fbff]">
         <div
           className="
             mx-auto
@@ -93,28 +85,40 @@ function Footer() {
               xl:gap-16
             "
           >
+
             {/* =====================================================
                 BRAND
             ====================================================== */}
 
             <div className="sm:col-span-2 lg:col-span-1">
+
               {/* LOGO */}
 
-              <div className="flex justify-start">
+              <div
+                className="
+                  inline-flex
+                  rounded-[5px]
+                  bg-white
+                  px-3
+                  py-2
+                  ring-1
+                  ring-[#dce8f2]
+                "
+              >
                 <Link
                   href="/"
                   aria-label="Multipathlab Home"
                   className="
                     inline-flex
-                    h-[70px]
+                    h-[65px]
                     w-[210px]
                     items-center
-                    sm:h-[76px]
-                    sm:w-[230px]
-                    lg:h-[82px]
-                    lg:w-[250px]
-                    xl:h-[88px]
-                    xl:w-[270px]
+                    sm:h-[72px]
+                    sm:w-[225px]
+                    lg:h-[78px]
+                    lg:w-[245px]
+                    xl:h-[84px]
+                    xl:w-[260px]
                   "
                 >
                   <img
@@ -138,7 +142,7 @@ function Footer() {
                   font-body
                   text-sm
                   leading-6
-                  text-medical-text
+                  text-[#45627f]
                   sm:text-[15px]
                 "
               >
@@ -149,22 +153,23 @@ function Footer() {
               {/* TRUST BADGES */}
 
               <div className="mt-6 flex flex-wrap gap-3">
+
                 <div
                   className="
                     inline-flex
                     items-center
                     gap-2
-                    rounded-lg
+                    rounded-[5px]
                     border
-                    border-border-light
-                    bg-medical-light
+                    border-[#dce8f2]
+                    bg-white
                     px-3
                     py-2
                   "
                 >
                   <ShieldCheck
                     size={16}
-                    className="text-brand-green"
+                    className="text-[#43b82a]"
                     strokeWidth={2}
                   />
 
@@ -175,7 +180,7 @@ function Footer() {
                       font-bold
                       uppercase
                       tracking-wide
-                      text-medical-navy
+                      text-[#12345b]
                     "
                   >
                     Trusted Service
@@ -187,17 +192,17 @@ function Footer() {
                     inline-flex
                     items-center
                     gap-2
-                    rounded-lg
+                    rounded-[5px]
                     border
-                    border-border-light
-                    bg-medical-blue-light
+                    border-[#dce8f2]
+                    bg-white
                     px-3
                     py-2
                   "
                 >
                   <Clock3
                     size={16}
-                    className="text-brand-blue"
+                    className="text-[#0068c9]"
                     strokeWidth={2}
                   />
 
@@ -208,17 +213,19 @@ function Footer() {
                       font-bold
                       uppercase
                       tracking-wide
-                      text-medical-navy
+                      text-[#12345b]
                     "
                   >
                     Home Collection
                   </span>
                 </div>
+
               </div>
 
               {/* SOCIAL */}
 
               <div className="mt-7 flex items-center gap-2.5">
+
                 <a
                   href="#"
                   aria-label="Facebook"
@@ -230,15 +237,14 @@ function Footer() {
                     justify-center
                     rounded-full
                     border
-                    border-border-light
+                    border-[#dce8f2]
                     bg-white
-                    text-medical-text
-                    shadow-sm
+                    text-[#12345b]
                     transition-all
                     duration-300
                     hover:-translate-y-1
-                    hover:border-brand-green
-                    hover:bg-brand-green
+                    hover:border-[#12345b]
+                    hover:bg-[#12345b]
                     hover:text-white
                   "
                 >
@@ -256,15 +262,14 @@ function Footer() {
                     justify-center
                     rounded-full
                     border
-                    border-border-light
+                    border-[#dce8f2]
                     bg-white
-                    text-medical-text
-                    shadow-sm
+                    text-[#12345b]
                     transition-all
                     duration-300
                     hover:-translate-y-1
-                    hover:border-brand-green
-                    hover:bg-brand-green
+                    hover:border-[#43b82a]
+                    hover:bg-[#43b82a]
                     hover:text-white
                   "
                 >
@@ -282,15 +287,14 @@ function Footer() {
                     justify-center
                     rounded-full
                     border
-                    border-border-light
+                    border-[#dce8f2]
                     bg-white
-                    text-medical-text
-                    shadow-sm
+                    text-[#12345b]
                     transition-all
                     duration-300
                     hover:-translate-y-1
-                    hover:border-brand-green
-                    hover:bg-brand-green
+                    hover:border-[#0068c9]
+                    hover:bg-[#0068c9]
                     hover:text-white
                   "
                 >
@@ -298,7 +302,7 @@ function Footer() {
                 </a>
 
                 <a
-                  href="#"
+                  href="https://wa.me/919082742451"
                   aria-label="WhatsApp"
                   className="
                     flex
@@ -308,20 +312,20 @@ function Footer() {
                     justify-center
                     rounded-full
                     border
-                    border-border-light
+                    border-[#dce8f2]
                     bg-white
-                    text-medical-text
-                    shadow-sm
+                    text-[#12345b]
                     transition-all
                     duration-300
                     hover:-translate-y-1
-                    hover:border-brand-green
-                    hover:bg-brand-green
+                    hover:border-[#43b82a]
+                    hover:bg-[#43b82a]
                     hover:text-white
                   "
                 >
                   <FaWhatsapp size={16} />
                 </a>
+
               </div>
             </div>
 
@@ -344,11 +348,11 @@ function Footer() {
                         gap-2.5
                         font-body
                         text-sm
-                        text-medical-text
+                        text-[#45627f]
                         transition-all
                         duration-200
                         hover:translate-x-1
-                        hover:text-brand-green
+                        hover:text-[#0068c9]
                       "
                     >
                       <span
@@ -357,9 +361,9 @@ function Footer() {
                           w-1.5
                           shrink-0
                           rounded-full
-                          bg-brand-blue/30
+                          bg-[#0068c9]/40
                           transition-colors
-                          group-hover:bg-brand-green
+                          group-hover:bg-[#43b82a]
                         "
                       />
 
@@ -389,11 +393,11 @@ function Footer() {
                         gap-2.5
                         font-body
                         text-sm
-                        text-medical-text
+                        text-[#45627f]
                         transition-all
                         duration-200
                         hover:translate-x-1
-                        hover:text-brand-green
+                        hover:text-[#0068c9]
                       "
                     >
                       <span
@@ -402,9 +406,9 @@ function Footer() {
                           w-1.5
                           shrink-0
                           rounded-full
-                          bg-brand-blue/30
+                          bg-[#0068c9]/40
                           transition-colors
-                          group-hover:bg-brand-green
+                          group-hover:bg-[#43b82a]
                         "
                       />
 
@@ -423,10 +427,11 @@ function Footer() {
               <FooterHeading title="Contact Us" />
 
               <div className="mt-6 space-y-5">
+
                 {/* PHONE */}
 
                 <a
-                  href="tel:+919673272466"
+                  href="tel:+919082742451"
                   className="group flex items-start gap-3"
                 >
                   <span
@@ -437,12 +442,12 @@ function Footer() {
                       shrink-0
                       items-center
                       justify-center
-                      rounded-xl
-                      bg-medical-blue-light
-                      text-brand-blue
+                      rounded-[5px]
+                      bg-[#eaf4ff]
+                      text-[#0068c9]
                       transition-all
                       duration-300
-                      group-hover:bg-brand-blue
+                      group-hover:bg-[#0068c9]
                       group-hover:text-white
                     "
                   >
@@ -457,7 +462,7 @@ function Footer() {
                         font-bold
                         uppercase
                         tracking-[0.14em]
-                        text-medical-text/70
+                        text-[#45627f]/70
                       "
                     >
                       Call Us
@@ -469,12 +474,12 @@ function Footer() {
                         font-body
                         text-sm
                         font-semibold
-                        text-medical-navy
+                        text-[#12345b]
                         transition-colors
-                        group-hover:text-brand-blue
+                        group-hover:text-[#0068c9]
                       "
                     >
-                      +91 96732 72466
+                      +91 90827 42451
                     </p>
                   </div>
                 </a>
@@ -482,7 +487,7 @@ function Footer() {
                 {/* EMAIL */}
 
                 <a
-                  href="mailto:info@multipathlab.com"
+                  href="mailto:info@multipathlab.in"
                   className="group flex items-start gap-3"
                 >
                   <span
@@ -493,12 +498,12 @@ function Footer() {
                       shrink-0
                       items-center
                       justify-center
-                      rounded-xl
-                      bg-medical-light
-                      text-brand-green
+                      rounded-[5px]
+                      bg-[#edf9ea]
+                      text-[#43b82a]
                       transition-all
                       duration-300
-                      group-hover:bg-brand-green
+                      group-hover:bg-[#43b82a]
                       group-hover:text-white
                     "
                   >
@@ -513,7 +518,7 @@ function Footer() {
                         font-bold
                         uppercase
                         tracking-[0.14em]
-                        text-medical-text/70
+                        text-[#45627f]/70
                       "
                     >
                       Email Us
@@ -526,73 +531,72 @@ function Footer() {
                         font-body
                         text-sm
                         font-semibold
-                        text-medical-navy
+                        text-[#12345b]
                         transition-colors
-                        group-hover:text-brand-green
+                        group-hover:text-[#43b82a]
                       "
                     >
-                      info@multipathlab.com
+                      info@multipathlab.in
                     </p>
                   </div>
                 </a>
 
                 {/* LOCATION */}
 
-                <div className="flex items-start gap-3">
-                  <span
-                    className="
-                      flex
-                      h-10
-                      w-10
-                      shrink-0
-                      items-center
-                      justify-center
-                      rounded-xl
-                      bg-medical-blue-light
-                      text-brand-blue
-                    "
-                  >
-                    <MapPin size={17} strokeWidth={2} />
-                  </span>
+               <div className="flex items-start gap-2">
+  <span
+    className="
+      flex
+      h-10
+      w-10
+      shrink-0
+      items-center
+      justify-center
+      rounded-[5px]
+      bg-[#eaf4ff]
+      text-[#0068c9]
+    "
+  >
+    <MapPin size={17} strokeWidth={2} />
+  </span>
 
-                  <div>
-                    <p
-                      className="
-                        font-heading
-                        text-[10px]
-                        font-bold
-                        uppercase
-                        tracking-[0.14em]
-                        text-medical-text/70
-                      "
-                    >
-                      Our Location
-                    </p>
+  <div className="pt-0">
+    <p
+      className="
+        font-heading
+        text-[10px]
+        font-bold
+        uppercase
+        tracking-[0.14em]
+        text-[#45627f]/70
+      "
+    >
+      Our Location
+    </p>
 
-                    <p
-                      className="
-                        mt-1
-                        font-body
-                        text-sm
-                        font-semibold
-                        leading-5
-                        text-medical-navy
-                      "
-                    >
-                      Gurgaon, Haryana
-                      <br />
-                      Serving Various Cities
-                    </p>
-                  </div>
-                </div>
+    <p
+      className="
+        font-body
+        text-sm
+        font-semibold
+        leading-6
+        text-[#12345b]
+      "
+    >
+      Bhartiye Society, Bldg No. 22,
+      <br />
+      Gautam Nagar, Mahada Bldg,
+      <br />
+      Near Quba Masjid,
+      <br />
+      Govandi West - 400043
+    </p>
+  </div>
+</div>
+
               </div>
             </div>
           </div>
-
-          {/* =====================================================
-              LOWER INFORMATION STRIP
-          ====================================================== */}
-
         </div>
       </section>
 
@@ -600,7 +604,7 @@ function Footer() {
           LEGAL BAR
       ========================================================= */}
 
-      <section className="border-t border-border-light bg-[#f8fbfd]">
+      <section className="border-t border-[#dce8f2] bg-[#12345b]">
         <div className="mx-auto max-w-[1440px] px-5 sm:px-8 lg:px-10 xl:px-12">
           <div
             className="
@@ -613,6 +617,7 @@ function Footer() {
               md:justify-between
             "
           >
+
             <p
               className="
                 font-body
@@ -620,7 +625,7 @@ function Footer() {
                 font-medium
                 uppercase
                 tracking-wide
-                text-medical-text
+                text-white/75
               "
             >
               © {currentYear} Multipathlab. All Rights Reserved.
@@ -637,16 +642,16 @@ function Footer() {
                       font-semibold
                       uppercase
                       tracking-wide
-                      text-medical-text
+                      text-white/75
                       transition-colors
-                      hover:text-brand-green
+                      hover:text-[#43b82a]
                     "
                   >
                     {item.name}
                   </Link>
 
                   {index !== legalLinks.length - 1 && (
-                    <span className="hidden h-3 w-px bg-border-light sm:block" />
+                    <span className="hidden h-3 w-px bg-white/20 sm:block" />
                   )}
                 </React.Fragment>
               ))}
@@ -667,15 +672,14 @@ function Footer() {
                 self-start
                 rounded-full
                 border
-                border-border-light
+                border-white/20
                 bg-white
-                text-medical-navy
-                shadow-sm
+                text-[#12345b]
                 transition-all
                 duration-300
                 hover:-translate-y-1
-                hover:border-brand-green
-                hover:bg-brand-green
+                hover:border-[#43b82a]
+                hover:bg-[#43b82a]
                 hover:text-white
                 md:self-auto
               "
@@ -690,6 +694,7 @@ function Footer() {
                 "
               />
             </button>
+
           </div>
         </div>
       </section>
@@ -711,15 +716,15 @@ function FooterHeading({ title }) {
           font-extrabold
           uppercase
           tracking-[0.04em]
-          text-medical-navy
+          text-[#12345b]
         "
       >
         {title}
       </h3>
 
       <div className="mt-3 flex items-center gap-1.5">
-        <span className="h-[3px] w-7 rounded-full bg-brand-green" />
-        <span className="h-[3px] w-2 rounded-full bg-brand-blue" />
+        <span className="h-[3px] w-7 rounded-full bg-[#43b82a]" />
+        <span className="h-[3px] w-2 rounded-full bg-[#0068c9]" />
       </div>
     </div>
   );

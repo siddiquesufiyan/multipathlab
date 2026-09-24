@@ -59,21 +59,21 @@ function Homebanner() {
               <span>Convenient</span>
             </div>
 
-            {/* HEADING */}
-            <h1 className="max-w-xl font-heading text-4xl font-extrabold leading-[1.13] tracking-tight text-medical-navy sm:text-5xl lg:text-[54px]">
-              Trusted Diagnostics.
-              <span className="block text-brand-green">
-                Right at Your Door.
-              </span>
-            </h1>
+        {/* HEADING */}
+<h1 className="max-w-2xl font-heading text-4xl font-extrabold leading-[1.13] tracking-tight text-medical-navy sm:text-5xl lg:text-[54px]">
+  Trusted Blood Collection.
+  <span className="block text-brand-green">
+    Right at Your Door.
+  </span>
+</h1>
 
-            {/* DESCRIPTION */}
-            <p className="mt-5 max-w-lg text-base leading-7 text-medical-text">
-              Get reliable blood tests, health checkups and
-              digital reports — all from the comfort of your
-              home. Our trained professionals ensure safe
-              sample collection with accurate and timely results.
-            </p>
+{/* DESCRIPTION */}
+<p className="mt-5 max-w-xl text-base leading-7 text-medical-text">
+  Kamruddin Shaikh, DMLT, Doctor & Lab Technician, offers affordable home
+  blood sample collection, diagnostic services, and digital reports. With
+  10+ years of experience, get professional sample collection and reliable
+  service right at your doorstep.
+</p>
 
             {/* BUTTONS */}
             <div className="mt-8 flex flex-wrap gap-3">
@@ -90,7 +90,7 @@ function Homebanner() {
               </button>
 
               <a
-                href="/health-packages"
+                href="/tests-packages"
                 className="inline-flex items-center justify-center gap-2 rounded-full border border-brand-blue/40 bg-white px-6 py-3.5 text-sm font-bold text-brand-blue transition duration-300 hover:bg-medical-blue-light"
               >
                 View Health Packages
