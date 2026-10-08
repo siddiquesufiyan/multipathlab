@@ -1,18 +1,19 @@
-
 "use client";
 
 import React, { useEffect, useState } from "react";
-import { FiMessageCircle, FiX } from "react-icons/fi";
+import { FiSend, FiX } from "react-icons/fi";
 
-const WHATSAPP_NUMBER = "91XXXXXXXXXX";
+const access_key = "93416e51-fcd1-4aaa-b7cd-9fb69a45c2b2";
 
 export default function BookingForm({
   isOpen,
   onClose,
   initialTest = "",
-  topOffset = "80px", // Navbar ki height ke hisaab se change karo
+  topOffset = "80px",
 }) {
   const [selectedTest, setSelectedTest] = useState(initialTest);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [error, setError] = useState("");
 
   const [form, setForm] = useState({
     name: "",
@@ -26,6 +27,7 @@ export default function BookingForm({
   useEffect(() => {
     if (isOpen) {
       setSelectedTest(initialTest);
+      setError("");
     }
   }, [isOpen, initialTest]);
 
@@ -59,32 +61,84 @@ export default function BookingForm({
     }));
   };
 
-  // Submit booking enquiry to WhatsApp
-  const submitBooking = (e) => {
+  // Submit booking through Web3Forms
+  const submitBooking = async (e) => {
     e.preventDefault();
 
-    const message = [
-      "Hello, I want to book a home blood collection.",
-      `Name: ${form.name}`,
-      `Phone: ${form.phone}`,
-      `Area: ${form.area}`,
-      `Date: ${form.date || "Not selected"}`,
-      `Time: ${form.time || "Flexible"}`,
-      `Test/Package: ${selectedTest || "Please suggest"}`,
-    ].join("\n");
+    setIsSubmitting(true);
+    setError("");
 
-    const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(
-      message
-    )}`;
+    try {
+      const formData = new FormData();
 
-    window.open(url, "_blank", "noopener,noreferrer");
+      formData.append("access_key", access_key);
+
+      // Email subject
+      formData.append(
+        "subject",
+        `New Home Blood Collection Booking - ${form.name}`
+      );
+
+      // Sender name shown in email
+      formData.append(
+        "from_name",
+        "Multipathlab Website Booking"
+      );
+
+      // Customer details
+      formData.append("name", form.name);
+      formData.append("phone", form.phone);
+      formData.append("area", form.area);
+      formData.append(
+        "preferred_date",
+        form.date || "Not selected"
+      );
+      formData.append(
+        "preferred_time",
+        form.time || "Flexible"
+      );
+      formData.append(
+        "test_package",
+        selectedTest || "Please suggest"
+      );
+
+      // Optional: redirect URL handled by our frontend
+      formData.append("botcheck", "");
+
+      const response = await fetch(
+        "https://api.web3forms.com/submit",
+        {
+          method: "POST",
+          body: formData,
+        }
+      );
+
+      const data = await response.json();
+
+      if (data.success) {
+        // Redirect after successful email submission
+        window.location.href = "/thank-you";
+        return;
+      }
+
+      throw new Error(
+        data.message || "Unable to submit your booking."
+      );
+    } catch (err) {
+      console.error("Booking submission error:", err);
+
+      setError(
+        "Something went wrong. Please try again or contact us directly."
+      );
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   // Do not render modal when closed
   if (!isOpen) return null;
 
   return (
-    /* ================= BOOKING FORM START ================= */
     <div
       className="fixed inset-x-0 bottom-0 z-[999] flex justify-center overflow-y-auto bg-medical-navy/60 p-2 backdrop-blur-sm sm:p-4"
       style={{
@@ -93,7 +147,6 @@ export default function BookingForm({
       }}
       onClick={onClose}
     >
-      {/* ================= MODAL CONTAINER START ================= */}
       <div
         role="dialog"
         aria-modal="true"
@@ -108,7 +161,7 @@ export default function BookingForm({
         }}
         onClick={(e) => e.stopPropagation()}
       >
-        {/* ================= FORM HEADER START ================= */}
+        {/* HEADER */}
         <div className="flex shrink-0 items-start justify-between gap-3 border-b border-border-light px-4 py-3 sm:px-5 sm:py-4">
           <div className="min-w-0">
             <p className="text-[11px] font-bold uppercase tracking-widest text-brand-green sm:text-xs">
@@ -123,23 +176,21 @@ export default function BookingForm({
             </h2>
 
             <p className="mt-1 text-xs leading-5 text-medical-text sm:text-sm">
-              Share your details to send an enquiry on WhatsApp.
+              Share your details and our team will contact you.
             </p>
           </div>
 
-          {/* CLOSE BUTTON */}
           <button
             type="button"
             onClick={onClose}
             aria-label="Close booking form"
-            className="flex h-9 cursor-pointer w-9 shrink-0 items-center justify-center rounded-lg bg-medical-light text-lg text-medical-navy transition hover:bg-border-light"
+            className="flex h-9 w-9 shrink-0 cursor-pointer items-center justify-center rounded-lg bg-medical-light text-lg text-medical-navy transition hover:bg-border-light"
           >
             <FiX />
           </button>
         </div>
-        {/* ================= FORM HEADER END ================= */}
 
-        {/* ================= FORM BODY START ================= */}
+        {/* FORM */}
         <form
           onSubmit={submitBooking}
           className="
@@ -148,7 +199,7 @@ export default function BookingForm({
             sm:space-y-4 sm:px-5 sm:py-5
           "
         >
-          {/* FULL NAME FIELD */}
+          {/* FULL NAME */}
           <div className="min-w-0">
             <label
               htmlFor="booking-name"
@@ -170,7 +221,7 @@ export default function BookingForm({
             />
           </div>
 
-          {/* PHONE NUMBER FIELD */}
+          {/* PHONE */}
           <div className="min-w-0">
             <label
               htmlFor="booking-phone"
@@ -195,7 +246,7 @@ export default function BookingForm({
             />
           </div>
 
-          {/* AREA FIELD */}
+          {/* AREA */}
           <div className="min-w-0">
             <label
               htmlFor="booking-area"
@@ -217,9 +268,8 @@ export default function BookingForm({
             />
           </div>
 
-          {/* DATE & TIME FIELDS */}
+          {/* DATE & TIME */}
           <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
-            {/* DATE FIELD */}
             <div className="min-w-0">
               <label
                 htmlFor="booking-date"
@@ -239,7 +289,6 @@ export default function BookingForm({
               />
             </div>
 
-            {/* TIME FIELD */}
             <div className="min-w-0">
               <label
                 htmlFor="booking-time"
@@ -264,7 +313,7 @@ export default function BookingForm({
             </div>
           </div>
 
-          {/* TEST / PACKAGE FIELD */}
+          {/* TEST / PACKAGE */}
           <div className="min-w-0">
             <label
               htmlFor="booking-test"
@@ -284,25 +333,41 @@ export default function BookingForm({
             />
           </div>
 
-          {/* SUBMIT BUTTON */}
+          {/* ERROR */}
+          {error && (
+            <div className="rounded-lg bg-red-50 px-3 py-2.5 text-center text-sm font-medium text-red-600">
+              {error}
+            </div>
+          )}
+
+          {/* SUBMIT */}
           <button
             type="submit"
-            className="flex  cursor-pointer w-full items-center justify-center gap-2 rounded-lg bg-brand-green px-4 py-3 text-sm font-bold text-white transition hover:bg-brand-green-dark focus:outline-none focus:ring-4 focus:ring-brand-green/20 sm:text-base"
+            disabled={isSubmitting}
+            className="
+              flex w-full cursor-pointer items-center justify-center
+              gap-2 rounded-lg bg-brand-green px-4 py-3
+              text-sm font-bold text-white transition
+              hover:bg-brand-green-dark
+              focus:outline-none focus:ring-4 focus:ring-brand-green/20
+              disabled:cursor-not-allowed disabled:opacity-60
+              sm:text-base
+            "
           >
-            <FiMessageCircle className="shrink-0 text-lg" />
-            <span>Send Booking Enquiry</span>
+            <FiSend className="shrink-0 text-lg" />
+
+            <span>
+              {isSubmitting
+                ? "Sending Booking..."
+                : "Submit Booking"}
+            </span>
           </button>
 
-          {/* FORM DISCLAIMER */}
           <p className="text-center text-xs leading-5 text-medical-text">
-            WhatsApp will open with your entered details. Booking is subject
-            to confirmation.
+            Your booking details will be securely sent to our team.
           </p>
         </form>
-        {/* ================= FORM BODY END ================= */}
       </div>
-      {/* ================= MODAL CONTAINER END ================= */}
     </div>
-    /* ================= BOOKING FORM END ================= */
   );
 }

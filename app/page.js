@@ -7,10 +7,12 @@ import Testimonial from "./components/Testimonial";
 import Faq from "./components/Faq";
 import Cta from "./components/Cta";
 import WorkProcess from "./components/WorkProcess";
+import HomeVisit from "./components/HomeVisit";
 function page() {
   return (
     <div>
      <Herobanner />
+      <HomeVisit />
      <AboutMe />
     <OurTest />
      <HomeCollection />

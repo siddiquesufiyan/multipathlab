@@ -1,6 +1,11 @@
+
 "use client";
+
+import { useState } from "react";
+import Link from "next/link";
 import Testimonals from "./Testimonial";
 import Faq from "./Faq";
+
 import {
   Mail,
   MapPin,
@@ -12,21 +17,112 @@ import {
   Send,
 } from "lucide-react";
 
+const access_key = "93416e51-fcd1-4aaa-b7cd-9fb69a45c2b2";
+
 function Contact() {
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [status, setStatus] = useState({
+    type: "",
+    message: "",
+  });
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+
+    setIsSubmitting(true);
+    setStatus({
+      type: "",
+      message: "",
+    });
+
+    const form = event.currentTarget;
+    const formData = new FormData(form);
+
+    // Web3Forms access key
+    formData.append("access_key", access_key);
+
+    // Email subject
+    formData.append(
+      "subject",
+      "New Contact Enquiry - MultiPathLab"
+    );
+
+    // Website / company name
+    formData.append(
+      "from_name",
+      "MultiPathLab Website"
+    );
+
+    // Important:
+    // Reply button in your email will reply to customer's email
+    formData.append(
+      "replyto",
+      formData.get("email")
+    );
+
+    // Spam protection
+    formData.append("botcheck", "");
+
+    try {
+      const response = await fetch(
+        "https://api.web3forms.com/submit",
+        {
+          method: "POST",
+          headers: {
+            Accept: "application/json",
+          },
+          body: formData,
+        }
+      );
+
+      const result = await response.json();
+
+      if (result.success) {
+        // Reset form
+        form.reset();
+
+        // Redirect to your thank-you page
+        window.location.href = "/thank-you";
+
+        return;
+      }
+
+      setStatus({
+        type: "error",
+        message:
+          result.message ||
+          "Unable to send your enquiry. Please try again.",
+      });
+    } catch (error) {
+      console.error("Web3Forms Error:", error);
+
+      setStatus({
+        type: "error",
+        message:
+          "Something went wrong. Please check your internet connection and try again.",
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
   return (
     <section className="mt-10 md:mt-2">
       <div className="mx-auto max-w-7xl">
+
         {/* MAIN CONTACT AREA */}
-        <div className="grid mb-16 overflow-hidden  border border-[var(--color-border-light)]   lg:grid-cols-[0.85fr_1.15fr]">
-          
+        <div className="mb-16 grid overflow-hidden border border-[var(--color-border-light)] lg:grid-cols-[0.85fr_1.15fr]">
+
           {/* LEFT - CONTACT INFO */}
           <div className="relative overflow-hidden bg-[var(--color-medical-light)] px-7 py-9 sm:px-10 sm:py-12 lg:px-12 lg:py-14">
-            
+
             {/* Decorative circles */}
             <div className="absolute -right-20 -top-20 h-52 w-52 rounded-full bg-[var(--color-brand-blue)] opacity-[0.05]" />
+
             <div className="absolute -bottom-24 -left-20 h-60 w-60 rounded-full bg-[var(--color-brand-green)] opacity-[0.06]" />
 
             <div className="relative z-10">
+
               <span className="mb-4 inline-flex items-center rounded-full bg-white px-4 py-2 font-[var(--font-body)] text-[12px] font-bold uppercase tracking-[0.12em] text-[var(--color-brand-blue)] shadow-sm">
                 MultiPathLab
               </span>
@@ -47,7 +143,7 @@ function Contact() {
               {/* CONTACT DETAILS */}
               <div className="mt-9 space-y-5">
 
-                {/* Name */}
+                {/* Doctor */}
                 <div className="flex gap-4">
                   <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-white text-[var(--color-brand-blue)] shadow-sm">
                     <UserRound size={19} strokeWidth={2} />
@@ -57,6 +153,7 @@ function Contact() {
                     <p className="font-[var(--font-body)] text-[11px] font-bold uppercase tracking-[0.1em] text-[var(--color-medical-text)]">
                       Doctor
                     </p>
+
                     <p className="mt-1 font-[var(--font-heading)] text-[15px] font-bold text-[var(--color-medical-navy)]">
                       Dr. Kamruddin Shaikh
                     </p>
@@ -127,11 +224,13 @@ function Contact() {
                     </p>
                   </div>
                 </div>
+
               </div>
 
               {/* HOME COLLECTION NOTE */}
               <div className="mt-9 rounded-2xl border border-[var(--color-brand-green)]/15 bg-white/80 p-5">
                 <div className="flex gap-3">
+
                   <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-[var(--color-brand-green)]/10 text-[var(--color-brand-green)]">
                     <MapPin size={18} />
                   </div>
@@ -146,13 +245,16 @@ function Contact() {
                       collection as per your requirement.
                     </p>
                   </div>
+
                 </div>
               </div>
+
             </div>
           </div>
 
           {/* RIGHT - CONTACT FORM */}
           <div className="bg-white px-7 py-9 sm:px-10 sm:py-12 lg:px-12 lg:py-14">
+
             <div className="mb-8">
               <span className="font-[var(--font-body)] text-[12px] font-bold uppercase tracking-[0.12em] text-[var(--color-brand-green)]">
                 Send an enquiry
@@ -168,12 +270,19 @@ function Contact() {
               </p>
             </div>
 
-            <form className="space-y-5">
+            {/* FORM */}
+            <form
+              onSubmit={handleSubmit}
+              className="space-y-5"
+            >
+
               {/* NAME + PHONE */}
               <div className="grid gap-5 sm:grid-cols-2">
+
+                {/* NAME */}
                 <div>
                   <label className="mb-2 block font-[var(--font-body)] text-[13px] font-bold text-[var(--color-medical-navy)]">
-                    Full Name
+                    Full Name *
                   </label>
 
                   <div className="relative">
@@ -185,15 +294,17 @@ function Contact() {
                     <input
                       type="text"
                       name="name"
+                      required
                       placeholder="Enter your name"
                       className="h-12 w-full rounded-xl border border-[var(--color-border-light)] bg-[#fbfdff] pl-11 pr-4 font-[var(--font-body)] text-sm text-[var(--color-brand-black)] outline-none transition-all placeholder:text-slate-400 focus:border-[var(--color-brand-blue)] focus:ring-4 focus:ring-[var(--color-brand-blue)]/10"
                     />
                   </div>
                 </div>
 
+                {/* PHONE */}
                 <div>
                   <label className="mb-2 block font-[var(--font-body)] text-[13px] font-bold text-[var(--color-medical-navy)]">
-                    Phone Number
+                    Phone Number *
                   </label>
 
                   <div className="relative">
@@ -205,17 +316,21 @@ function Contact() {
                     <input
                       type="tel"
                       name="phone"
+                      required
+                      inputMode="tel"
+                      pattern="[0-9+\-\s]{10,15}"
                       placeholder="Enter phone number"
                       className="h-12 w-full rounded-xl border border-[var(--color-border-light)] bg-[#fbfdff] pl-11 pr-4 font-[var(--font-body)] text-sm text-[var(--color-brand-black)] outline-none transition-all placeholder:text-slate-400 focus:border-[var(--color-brand-blue)] focus:ring-4 focus:ring-[var(--color-brand-blue)]/10"
                     />
                   </div>
                 </div>
+
               </div>
 
               {/* EMAIL */}
               <div>
                 <label className="mb-2 block font-[var(--font-body)] text-[13px] font-bold text-[var(--color-medical-navy)]">
-                  Email Address
+                  Email Address *
                 </label>
 
                 <div className="relative">
@@ -227,6 +342,8 @@ function Contact() {
                   <input
                     type="email"
                     name="email"
+                    required
+                    autoComplete="email"
                     placeholder="Enter your email address"
                     className="h-12 w-full rounded-xl border border-[var(--color-border-light)] bg-[#fbfdff] pl-11 pr-4 font-[var(--font-body)] text-sm text-[var(--color-brand-black)] outline-none transition-all placeholder:text-slate-400 focus:border-[var(--color-brand-blue)] focus:ring-4 focus:ring-[var(--color-brand-blue)]/10"
                   />
@@ -236,7 +353,7 @@ function Contact() {
               {/* ADDRESS */}
               <div>
                 <label className="mb-2 block font-[var(--font-body)] text-[13px] font-bold text-[var(--color-medical-navy)]">
-                  Address
+                  Address *
                 </label>
 
                 <div className="relative">
@@ -247,6 +364,7 @@ function Contact() {
 
                   <textarea
                     name="address"
+                    required
                     rows={3}
                     placeholder="Enter your address"
                     className="w-full resize-none rounded-xl border border-[var(--color-border-light)] bg-[#fbfdff] py-3 pl-11 pr-4 font-[var(--font-body)] text-sm text-[var(--color-brand-black)] outline-none transition-all placeholder:text-slate-400 focus:border-[var(--color-brand-blue)] focus:ring-4 focus:ring-[var(--color-brand-blue)]/10"
@@ -254,8 +372,10 @@ function Contact() {
                 </div>
               </div>
 
-              {/* TEST / SERVICE */}
+              {/* TEST / DATE */}
               <div className="grid gap-5 sm:grid-cols-2">
+
+                {/* TEST */}
                 <div>
                   <label className="mb-2 block font-[var(--font-body)] text-[13px] font-bold text-[var(--color-medical-navy)]">
                     Test / Package
@@ -276,6 +396,7 @@ function Contact() {
                   </div>
                 </div>
 
+                {/* DATE */}
                 <div>
                   <label className="mb-2 block font-[var(--font-body)] text-[13px] font-bold text-[var(--color-medical-navy)]">
                     Preferred Date
@@ -290,10 +411,12 @@ function Contact() {
                     <input
                       type="date"
                       name="date"
+                      min={new Date().toLocaleDateString("en-CA")}
                       className="h-12 w-full rounded-xl border border-[var(--color-border-light)] bg-[#fbfdff] pl-11 pr-4 font-[var(--font-body)] text-sm text-[var(--color-brand-black)] outline-none transition-all focus:border-[var(--color-brand-blue)] focus:ring-4 focus:ring-[var(--color-brand-blue)]/10"
                     />
                   </div>
                 </div>
+
               </div>
 
               {/* TIME */}
@@ -316,9 +439,18 @@ function Contact() {
                     <option value="" disabled>
                       Select preferred time
                     </option>
-                    <option value="morning">Morning</option>
-                    <option value="afternoon">Afternoon</option>
-                    <option value="evening">Evening</option>
+
+                    <option value="Morning">
+                      Morning
+                    </option>
+
+                    <option value="Afternoon">
+                      Afternoon
+                    </option>
+
+                    <option value="Evening">
+                      Evening
+                    </option>
                   </select>
                 </div>
               </div>
@@ -337,29 +469,62 @@ function Contact() {
                 />
               </div>
 
+              {/* HONEYPOT SPAM PROTECTION */}
+              <input
+                type="checkbox"
+                name="botcheck"
+                className="hidden"
+                tabIndex="-1"
+                autoComplete="off"
+              />
+
+              {/* ERROR MESSAGE */}
+              {status.type === "error" && (
+                <div className="border border-red-200 bg-red-50 px-4 py-3 text-sm font-medium text-red-600">
+                  {status.message}
+                </div>
+              )}
+
               {/* SUBMIT */}
               <button
                 type="submit"
-                className="group flex h-13 w-full items-center justify-center gap-2 rounded-xl bg-[var(--color-brand-blue)] px-6 py-3.5 font-[var(--font-heading)] text-sm font-bold text-white shadow-[0_8px_24px_rgba(0,104,201,0.18)] transition-all duration-200 hover:-translate-y-[1px] hover:bg-[var(--color-brand-blue-dark)]"
+                disabled={isSubmitting}
+                className="group flex h-13 w-full items-center justify-center gap-2 rounded-xl bg-[var(--color-brand-blue)] px-6 py-3.5 font-[var(--font-heading)] text-sm font-bold text-white shadow-[0_8px_24px_rgba(0,104,201,0.18)] transition-all duration-200 hover:-translate-y-[1px] hover:bg-[var(--color-brand-blue-dark)] disabled:cursor-not-allowed disabled:opacity-60"
               >
-                Send Enquiry
-                <Send
-                  size={17}
-                  strokeWidth={2}
-                  className="transition-transform duration-200 group-hover:translate-x-1"
-                />
+                {isSubmitting ? (
+                  <>
+                    <span className="h-4 w-4 animate-spin rounded-full border-2 border-white/30 border-t-white" />
+                    Sending Enquiry...
+                  </>
+                ) : (
+                  <>
+                    Send Enquiry
+                    <Send
+                      size={17}
+                      strokeWidth={2}
+                      className="transition-transform duration-200 group-hover:translate-x-1"
+                    />
+                  </>
+                )}
               </button>
+
             </form>
           </div>
         </div>
-<Testimonals />
-<div className="mt-8 md:mt-16">
- <Faq />
-</div>
-       
-        {/* MAP SECTION - FULL WIDTH */}
+
+        {/* TESTIMONIALS */}
+        <Testimonals />
+
+        {/* FAQ */}
+        <div className="mt-8 md:mt-16">
+          <Faq />
+        </div>
+
+        {/* MAP SECTION */}
         <div className="mt-8 overflow-hidden rounded-[28px] border border-[var(--color-border-light)] bg-white shadow-[0_18px_60px_rgba(18,52,91,0.07)]">
+
           <div className="flex items-center gap-3 border-b border-[var(--color-border-light)] px-6 py-5 sm:px-8">
+
             <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-[var(--color-brand-blue)]/10 text-[var(--color-brand-blue)]">
               <MapPin size={19} />
             </div>
@@ -373,9 +538,11 @@ function Contact() {
                 Govandi West, Mumbai – 400043
               </p>
             </div>
+
           </div>
 
           <div className="h-[360px] w-full sm:h-[430px] lg:h-[480px]">
+
             <iframe
               title="MultiPathLab Location"
               src="https://www.google.com/maps?q=Gautam%20Nagar%20Govandi%20West%20Mumbai%20400043&output=embed"
@@ -383,11 +550,14 @@ function Contact() {
               loading="lazy"
               referrerPolicy="no-referrer-when-downgrade"
             />
+
           </div>
         </div>
+
       </div>
     </section>
   );
 }
 
 export default Contact;
+

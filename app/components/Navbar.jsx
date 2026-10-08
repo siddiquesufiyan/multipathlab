@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import Image from "next/image";
 import BookingForm from "./BookingForm";
 import {
   CalendarDays,
@@ -46,11 +45,7 @@ function Navbar() {
   ========================================== */
 
   useEffect(() => {
-    if (isMenuOpen) {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "";
-    }
+    document.body.style.overflow = isMenuOpen ? "hidden" : "";
 
     return () => {
       document.body.style.overflow = "";
@@ -87,98 +82,111 @@ function Navbar() {
           top-0
           z-[100]
           w-full
+
           border-b
           border-[var(--color-border-light)]
+
           bg-white
         "
       >
-        {/* ===================================================
-            MAIN CONTAINER
-        ==================================================== */}
+        {/* =================================================
+            MAIN NAVBAR CONTAINER
+        ================================================= */}
 
         <div
           className="
             mx-auto
             flex
-            h-[70px]
             w-full
-            max-w-[1240px]
+            max-w-[1200px]
+
             items-center
             justify-between
 
             px-4
 
-            sm:h-[74px]
-            sm:px-6
+            h-[64px]
 
-            md:h-[78px]
-            md:px-8
+            sm:px-5
+            sm:h-[68px]
 
-            lg:h-[82px]
-            lg:px-10
+            md:px-6
+            md:h-[72px]
 
-            xl:h-[84px]
+            lg:px-8
+            lg:h-[76px]
+
             xl:px-8
+            xl:h-[78px]
 
             2xl:px-10
+            2xl:h-[80px]
           "
         >
           {/* =================================================
               LOGO
-
-              NO LINK
           ================================================= */}
 
-          <div
+          <a
+            href="/"
+            aria-label="Multipathlab Home"
             className="
-              relative
               flex
-              h-[50px]
-              w-[150px]
               shrink-0
               items-center
 
-              sm:h-[54px]
-              sm:w-[165px]
+              h-full
 
-              md:h-[58px]
-              md:w-[180px]
-
-              lg:h-[62px]
-              lg:w-[195px]
-
-              xl:h-[66px]
-              xl:w-[205px]
-
-              2xl:h-[70px]
-              2xl:w-[215px]
+              overflow-visible
             "
           >
-             <Image
-    src="/homepathlab.png"
-    alt="Multipathlab"
-    fill
-    priority
-    quality={100}
-    sizes="150px"
-    className="object-contain cursor-pointer object-left"
-  />
-          </div>
+            <img
+              src="/multipath-main-logo-remover.png"
+              alt="Multipathlab"
+              loading="eager"
+              fetchPriority="high"
+              decoding="async"
+              className="
+               
+  block
+  h-auto
+  w-[80px]
+
+  max-w-none
+
+  object-cover
+  object-left
+
+  sm:w-[120px]
+
+  md:w-[100px]
+
+  lg:w-[100px]
+
+  xl:w-[100px]
+
+  2xl:w-[100px]
+"
+            
+            />
+          </a>
 
           {/* =================================================
               DESKTOP NAVIGATION
-
               1280px+
-          ================================================== */}
+          ================================================= */}
 
           <nav
             className="
               hidden
+
               xl:flex
               xl:flex-1
-              xl:items-stretch
+
+              xl:items-center
               xl:justify-center
-              xl:self-stretch
+
+              xl:h-full
             "
             aria-label="Main navigation"
           >
@@ -186,12 +194,13 @@ function Navbar() {
               className="
                 flex
                 h-full
-                items-stretch
+
+                items-center
                 justify-center
 
-                gap-1
+                gap-0
 
-                2xl:gap-2
+                2xl:gap-1
               "
             >
               {navLinks.map((link) => (
@@ -204,15 +213,21 @@ function Navbar() {
 
                     flex
                     h-full
+
                     items-center
                     justify-center
 
                     px-2.5
 
+                    2xl:px-3
+
                     font-[var(--font-heading)]
-                    text-[14px]
+                    text-[13px]
+                    2xl:text-[14px]
+
                     font-semibold
                     uppercase
+
                     tracking-[0.01em]
                     whitespace-nowrap
 
@@ -222,20 +237,13 @@ function Navbar() {
                     duration-200
 
                     hover:text-[var(--color-brand-green)]
-
-                    2xl:px-3
-                    2xl:text-[15px]
                   "
                 >
                   <span>
                     {link.name}
                   </span>
 
-                  {/* =========================================
-                      PERFECT HOVER LINE
-
-                      INSIDE EACH LINK
-                  ========================================== */}
+                  {/* HOVER LINE */}
 
                   <span
                     className="
@@ -258,7 +266,7 @@ function Navbar() {
                       duration-300
                       ease-out
 
-                      group-hover:w-[calc(100%-20px)]
+                      group-hover:w-[calc(100%-16px)]
                     "
                   />
                 </a>
@@ -267,14 +275,15 @@ function Navbar() {
           </nav>
 
           {/* =================================================
-              DESKTOP CTA
-          ================================================== */}
+              DESKTOP BOOK TEST
+          ================================================= */}
 
           <button
             type="button"
             onClick={() => setBookingOpen(true)}
             className="
               hidden
+
               shrink-0
 
               items-center
@@ -285,33 +294,38 @@ function Navbar() {
 
               bg-[var(--color-brand-green)]
 
-              px-5
-              py-3
+              px-4
+              py-2.5
+
+              xl:inline-flex
+
+              2xl:px-5
+              2xl:py-3
 
               font-[var(--font-heading)]
-              text-[13px]
+              text-[12px]
+              2xl:text-[13px]
+
               font-bold
               uppercase
+
               tracking-[0.02em]
+
               text-white
 
               shadow-[0_5px_18px_rgba(67,184,42,0.16)]
 
               transition-all
               duration-200
-                cursor-pointer
+
+              cursor-pointer
+
               hover:-translate-y-[1px]
               hover:bg-[var(--color-brand-green-dark)]
-
-              xl:inline-flex
-
-              2xl:px-6
-              2xl:py-3.5
-              2xl:text-[14px]
             "
           >
             <CalendarDays
-              size={17}
+              size={16}
               strokeWidth={2}
             />
 
@@ -320,26 +334,23 @@ function Navbar() {
 
           {/* =================================================
               MOBILE / TABLET ACTIONS
-
               BELOW 1280px
-          ================================================== */}
+          ================================================= */}
 
           <div
             className="
               flex
+              shrink-0
+
               items-center
+              justify-end
+
               gap-2
-
-              sm:gap-2.5
-
-              md:gap-3
 
               xl:hidden
             "
           >
-            {/* ===============================================
-                BOOK TEST
-            ================================================ */}
+            {/* BOOK TEST */}
 
             <button
               type="button"
@@ -347,7 +358,7 @@ function Navbar() {
               className="
                 inline-flex
 
-                h-[40px]
+                h-[38px]
 
                 items-center
                 justify-center
@@ -357,42 +368,50 @@ function Navbar() {
 
                 bg-[var(--color-brand-green)]
 
-                px-3.5
+                px-3
 
                 font-[var(--font-heading)]
-                text-[11px]
+                text-[10px]
+
                 font-bold
                 uppercase
+
                 tracking-[0.01em]
+
                 text-white
 
-                transition-colors
+                transition-all
                 duration-200
+
+                cursor-pointer
 
                 hover:bg-[var(--color-brand-green-dark)]
 
-                sm:h-[42px]
-                sm:px-4
-                sm:text-[12px]
+                sm:h-[40px]
+                sm:px-3.5
+                sm:text-[11px]
 
-                md:h-[44px]
-                md:px-5
-                md:text-[13px]
+                md:h-[42px]
+                md:px-4
+                md:text-[12px]
 
-                lg:h-[46px]
-                lg:px-5
-                lg:text-[14px]
+                lg:h-[44px]
+                lg:px-4.5
+                lg:text-[13px]
               "
             >
               <CalendarDays
-                size={15}
+                size={14}
                 strokeWidth={2}
                 className="
-                  sm:h-4
-                  sm:w-4
+                  sm:h-[15px]
+                  sm:w-[15px]
 
-                  md:h-[17px]
-                  md:w-[17px]
+                  md:h-4
+                  md:w-4
+
+                  lg:h-[17px]
+                  lg:w-[17px]
                 "
               />
 
@@ -401,9 +420,7 @@ function Navbar() {
               </span>
             </button>
 
-            {/* ===============================================
-                MENU BUTTON
-            ================================================ */}
+            {/* MENU */}
 
             <button
               type="button"
@@ -421,8 +438,9 @@ function Navbar() {
                 z-[140]
 
                 flex
-                h-[42px]
-                w-[42px]
+                h-[40px]
+                w-[40px]
+
                 shrink-0
 
                 items-center
@@ -440,27 +458,29 @@ function Navbar() {
                 transition-all
                 duration-200
 
+                cursor-pointer
+
                 hover:border-[var(--color-brand-green)]
                 hover:text-[var(--color-brand-green)]
 
-                sm:h-[44px]
-                sm:w-[44px]
+                sm:h-[42px]
+                sm:w-[42px]
 
-                md:h-[46px]
-                md:w-[46px]
+                md:h-[44px]
+                md:w-[44px]
 
-                lg:h-[48px]
-                lg:w-[48px]
+                lg:h-[46px]
+                lg:w-[46px]
               "
             >
               {isMenuOpen ? (
                 <X
-                  size={22}
+                  size={21}
                   strokeWidth={2}
                 />
               ) : (
                 <Menu
-                  size={23}
+                  size={22}
                   strokeWidth={2}
                 />
               )}
@@ -488,9 +508,7 @@ function Navbar() {
           }
         `}
       >
-        {/* =================================================
-            CLEAR OVERLAY
-        ================================================== */}
+        {/* OVERLAY */}
 
         <button
           type="button"
@@ -515,7 +533,7 @@ function Navbar() {
 
         {/* =================================================
             MENU PANEL
-        ================================================== */}
+        ================================================= */}
 
         <div
           className={`
@@ -523,9 +541,9 @@ function Navbar() {
             left-0
             right-0
 
-            top-[70px]
+            top-[64px]
 
-            max-h-[calc(100vh-70px)]
+            max-h-[calc(100vh-64px)]
 
             overflow-y-auto
 
@@ -540,14 +558,14 @@ function Navbar() {
             duration-300
             ease-out
 
-            sm:top-[74px]
-            sm:max-h-[calc(100vh-74px)]
+            sm:top-[68px]
+            sm:max-h-[calc(100vh-68px)]
 
-            md:top-[78px]
-            md:max-h-[calc(100vh-78px)]
+            md:top-[72px]
+            md:max-h-[calc(100vh-72px)]
 
-            lg:top-[82px]
-            lg:max-h-[calc(100vh-82px)]
+            lg:top-[76px]
+            lg:max-h-[calc(100vh-76px)]
 
             ${
               isMenuOpen
@@ -556,10 +574,6 @@ function Navbar() {
             }
           `}
         >
-          {/* =================================================
-              MENU INNER CONTAINER
-          ================================================== */}
-
           <nav
             aria-label="Mobile navigation"
             className="
@@ -580,9 +594,7 @@ function Navbar() {
               lg:py-8
             "
           >
-            {/* =================================================
-                MOBILE MENU LINKS
-            ================================================== */}
+            {/* MOBILE LINKS */}
 
             <div
               className="
@@ -605,7 +617,7 @@ function Navbar() {
                     group
 
                     flex
-                    min-h-[56px]
+                    min-h-[54px]
 
                     items-center
                     justify-between
@@ -613,10 +625,11 @@ function Navbar() {
                     px-5
 
                     font-[var(--font-heading)]
-                    text-[15px]
-                    font-semibold
+                    text-[14px]
 
+                    font-semibold
                     uppercase
+
                     tracking-[0.01em]
 
                     text-[var(--color-medical-navy)]
@@ -627,17 +640,17 @@ function Navbar() {
                     hover:bg-[var(--color-medical-light)]
                     hover:text-[var(--color-brand-green)]
 
-                    sm:min-h-[59px]
+                    sm:min-h-[57px]
                     sm:px-6
-                    sm:text-[16px]
+                    sm:text-[15px]
 
-                    md:min-h-[62px]
+                    md:min-h-[60px]
                     md:px-7
-                    md:text-[17px]
+                    md:text-[16px]
 
-                    lg:min-h-[64px]
+                    lg:min-h-[62px]
                     lg:px-8
-                    lg:text-[17px]
+                    lg:text-[16px]
 
                     ${
                       index !== navLinks.length - 1
@@ -651,7 +664,7 @@ function Navbar() {
                   </span>
 
                   <ChevronRight
-                    size={19}
+                    size={18}
                     strokeWidth={2}
                     className="
                       shrink-0
@@ -668,9 +681,7 @@ function Navbar() {
               ))}
             </div>
 
-            {/* =================================================
-                MOBILE MENU CTA
-            ================================================== */}
+            {/* MOBILE BOOK TEST */}
 
             <button
               type="button"
@@ -682,7 +693,8 @@ function Navbar() {
                 mt-4
 
                 flex
-                min-h-[55px]
+                min-h-[53px]
+                w-full
 
                 items-center
                 justify-center
@@ -695,26 +707,31 @@ function Navbar() {
                 px-5
 
                 font-[var(--font-heading)]
-                text-[15px]
+                text-[14px]
+
                 font-bold
                 uppercase
+
                 tracking-[0.01em]
+
                 text-white
 
                 transition-colors
                 duration-200
 
+                cursor-pointer
+
                 hover:bg-[var(--color-brand-green-dark)]
 
-                sm:min-h-[58px]
-                sm:text-[16px]
+                sm:min-h-[56px]
+                sm:text-[15px]
 
-                md:min-h-[60px]
-                md:text-[17px]
+                md:min-h-[58px]
+                md:text-[16px]
               "
             >
               <CalendarDays
-                size={19}
+                size={18}
                 strokeWidth={2}
               />
 
@@ -724,7 +741,10 @@ function Navbar() {
         </div>
       </div>
 
-      {/* BOOKING FORM MODAL */}
+      {/* =====================================================
+          BOOKING FORM
+      ===================================================== */}
+
       <BookingForm
         isOpen={bookingOpen}
         onClose={() => setBookingOpen(false)}

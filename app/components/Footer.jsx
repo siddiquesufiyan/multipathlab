@@ -93,51 +93,36 @@ function Footer() {
             <div className="sm:col-span-2 lg:col-span-1">
 
               {/* LOGO */}
+{/* LOGO */}
 
-              <div
-                className="
-                  inline-flex
-                  rounded-[5px]
-                  bg-white
-                  px-3
-                  py-2
-                  ring-1
-                  ring-[#dce8f2]
-                "
-              >
-                <Link
-                  href="/"
-                  aria-label="Multipathlab Home"
-                  className="
-                    inline-flex
-                    h-[65px]
-                    w-[210px]
-                    items-center
-                    sm:h-[72px]
-                    sm:w-[225px]
-                    lg:h-[78px]
-                    lg:w-[245px]
-                    xl:h-[84px]
-                    xl:w-[260px]
-                  "
-                >
-                  <img
-                    src="/homepathlab-removebg-preview.png"
-                    alt="Multipathlab"
-                    className="
-                      block
-                      h-full
-                      w-full
-                      object-contain
-                      object-left
-                    "
-                  />
-                </Link>
-              </div>
+<div
+  className="
+    flex
+    w-full
+    items-center
+    justify-start
+    lg:justify-center
+  "
+>
+  <img
+    src="/multipath-main-logo-remover.png"
+    alt="Multipathlab"
+    className="
+      block
+      h-auto
+      w-[150px]
+      sm:w-[180px]
+      md:w-[200px]
+      lg:w-[120px]
+      xl:w-[120px]
+      object-cover
+      object-center
+    "
+  />
+</div>
 
               <p
                 className="
-                  mt-5
                   max-w-[430px]
                   font-body
                   text-sm
@@ -152,7 +137,7 @@ function Footer() {
 
               {/* TRUST BADGES */}
 
-              <div className="mt-6 flex flex-wrap gap-3">
+              <div className="mt-2 flex flex-wrap gap-3">
 
                 <div
                   className="
@@ -227,7 +212,7 @@ function Footer() {
               <div className="mt-7 flex items-center gap-2.5">
 
                 <a
-                  href="#"
+                  href="https://www.facebook.com/kamruddinshaikh451/"
                   aria-label="Facebook"
                   className="
                     flex
@@ -252,7 +237,7 @@ function Footer() {
                 </a>
 
                 <a
-                  href="#"
+                  href="https://www.instagram.com/multipathlab_mumbai/"
                   aria-label="Instagram"
                   className="
                     flex
